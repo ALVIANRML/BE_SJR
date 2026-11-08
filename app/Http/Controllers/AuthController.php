@@ -42,7 +42,6 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Username atau password salah',
                 'success' => false, 
-            // 'hash_password' => $hashPassword
             ], 401);
         }
         
