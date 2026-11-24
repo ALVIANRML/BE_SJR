@@ -50,6 +50,7 @@ class KreditLimitController extends Controller
         try {
             $validate = $request->validate([
                 'id_segment' => 'required|exists:segment,id',
+                'id_perusahaan' => 'required|exists:perusahaan,id',
                 'total_kredit' => 'required',
                 'sisa_limit' => 'required',
             ]);
@@ -111,6 +112,7 @@ class KreditLimitController extends Controller
         try {
             $validate = $request->validate([
                 'id_segment' => 'required|exists:segment,id',
+                'id_perusahaan' => 'required|exists:perusahaan,id',
                 'total_kredit' => 'required',
                 'sisa_limit' => 'required',
             ]);

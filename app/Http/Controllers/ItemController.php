@@ -45,8 +45,10 @@ class ItemController extends Controller
     {
         $validate = $request->validate([
             'id_segment' => 'required|exists:segment,id',
+            'id_perusahaan' => 'required|exists:perusahaan,id',
             'nama_item' => 'required',
             'kemasan' => 'required',
+            'jumlah_item' =>'required',
             'jumlah_liter' => 'required|numeric|min:0',
             'harga_jual' => 'required|numeric|min:0',
             'harga_tebus' => 'required|numeric|min:0',
@@ -113,8 +115,10 @@ class ItemController extends Controller
         try {
             $validate = $request->validate([
                 'id_segment' => 'required|exists:segment,id',
+                'id_perusahaan' => 'required|exists:perusahaan,id',
                 'nama_item' => 'required',
                 'kemasan' => 'required',
+                'jumlah_item' => 'required',
                 'jumlah_liter' => 'required|numeric|min:0',
                 'harga_jual' => 'required|numeric|min:0',
                 'harga_tebus' => 'required|numeric|min:0',

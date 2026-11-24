@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stok', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('id_item');
-            $table->foreign('id_item')
-            ->references('id')
-            ->on('item');
-            $table->integer('jumlah_item');
+        Schema::create('perusahaan', function (Blueprint $table) {
+            $table->smallIncrements('id');
+            $table->string('nama');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stok');
+        Schema::dropIfExists('table_perusahaan');
     }
 };

@@ -38,10 +38,10 @@ class TebusanController extends Controller
                 'bulan_romawi' => 'required',
                 'tahun' => 'required',
                 'metode_tebusan' => 'required',
-                'tanggal' => 'required',
+                'tanggal_tebus' => 'required',
 
                 'items' => 'required|array|min:1',
-                'items.*.id_stok' => 'required|exists:stok,id',
+                'items.*.id_item' => 'required|exists:item,id',
                 'items.*.jumlah' => 'required|numeric|min:1',
                 'items.*.harga' => 'nullable|numeric|min:0',
             ]);

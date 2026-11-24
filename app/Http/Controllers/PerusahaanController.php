@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stok;
+use App\Models\Perusahaan;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
-class StokController extends Controller
+class PerusahaanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +14,22 @@ class StokController extends Controller
     public function index()
     {
         try {
-            $stok = Stok::all();
+            $perusahaan = Perusahaan::all();
 
             return response()->json([
-                'message' => 'Berhasil menampilkan semua data',
+                'message' => 'Data berhasil di tampilkan',
+                'data' => $perusahaan,
                 'success' => true,
-                'status' => 200,
-                'data' => $stok,
             ], 200);
-        } catch (\Exception $e) {
+        } catch (ModelNotFoundException) {
             return response()->json([
-                'message' => 'Gagal menampilkan data',
+                'message' => 'Data tidak ditemukan',
                 'success' => false,
-                'status' => 500,
+            ], 404);
+        } catch (\Exception) {
+            return response()->json([
+                'message' => 'Data gagal di tampilkan',
+                'success' => false,
             ], 500);
         }
     }
@@ -46,20 +49,19 @@ class StokController extends Controller
     {
         try {
             $validate = $request->validate([
-                'id_item' => 'required|exists:item,id',
-                'jumlah_item' => 'required',
+                'nama' => 'required',
             ]);
 
-            $stok = Stok::create($validate);
+            $perusahaan = Perusahaan::create($validate);
 
             return response()->json([
                 'message' => 'Data berhasil di tambahkan',
+                'data' => $perusahaan,
                 'success' => true,
-                'data' => $stok,
             ], 200);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return response()->json([
-                'message' => 'Data gagal disimpan '.$e,
+                'message' => 'Data gagal ditambahkan',
                 'success' => false,
             ], 500);
         }
@@ -71,26 +73,24 @@ class StokController extends Controller
     public function show(string $id)
     {
         try {
-            $stok = Stok::findOrFail($id);
+            $perusahaan = Perusahaan::findOrFail($id);
 
             return response()->json([
+                'message' => 'Data berhasil di tampilkan',
+                'data' => $perusahaan,
                 'success' => true,
-                'message' => 'Data Berhasil di Tampilkan',
-                'data' => $stok,
             ], 200);
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return response()->json([
-                'success' => true,
-                'message' => 'Data Tidak Ditemukan '.$e,
+                'message' => 'Data tidak ditemukan',
+                'success' => false,
             ], 404);
-
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return response()->json([
-                'success' => true,
-                'message' => 'Error '.$e,
+                'message' => 'Data gagal di tampilkan',
+                'success' => false,
             ], 500);
         }
-
     }
 
     /**
@@ -107,29 +107,24 @@ class StokController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $validate = $request->validate([
-                'id_item' => 'required|exists:item,id',
-                'jumlah_item' => 'required',
-            ]);
-
-            $stok = Stok::findOrFail($id);
-            $stok->update($validate);
+            $validate = $request->validate(['nama' => 'required']);
+            $perusahaan = Perusahaan::findOrFail($id);
+            $perusahaan->update($validate);
 
             return response()->json([
+                'message' => 'Data berhasil di update',
+                'data' => $perusahaan,
                 'success' => true,
-                'message' => 'Data Berhasil di Update',
-                'data' => $stok,
             ], 200);
-        } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException) {
             return response()->json([
-                'success' => true,
-                'message' => 'Data Tidak Ditemukan '.$e,
+                'message' => 'Data tidak ditemukan',
+                'success' => false,
             ], 404);
-
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return response()->json([
-                'success' => true,
-                'message' => 'Error '.$e,
+                'message' => 'Data gagal di update',
+                'success' => false,
             ], 500);
         }
     }
@@ -140,7 +135,8 @@ class StokController extends Controller
     public function destroy(string $id)
     {
         try {
-            $deleted = Stok::destroy($id);
+            $deleted = Perusahaan::destroy($id);
+
             if ($deleted === 0) {
                 return response()->json([
                     'message' => 'Data tidak ditemukan',

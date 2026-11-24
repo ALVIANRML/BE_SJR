@@ -17,6 +17,10 @@ return new class extends Migration
             $table->foreign('id_segment')
             ->references('id')
             ->on('segment');
+            $table->smallInteger('id_perusahaan');
+            $table->foreign('id_perusahaan')
+            ->references('id')
+            ->on('perusahaan');
             $table->decimal('total_kredit',30,2);
             $table->decimal('sisa_limit', 30,2);
             $table->timestamps();

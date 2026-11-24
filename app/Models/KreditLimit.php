@@ -12,11 +12,16 @@ class KreditLimit extends Model
 
     protected $fillable = [
         'id_segment',
+        'id_perusahaan',
         'total_kredit',
         'sisa_limit',
     ];
 
     public $timestamps = true;
+
+    public function perusahaan(){
+        return $this->belongsTo(Perusahaan::class);
+    }
 
     public function segment()
     {

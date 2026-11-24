@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Tebusan extends Model
@@ -14,11 +13,10 @@ class Tebusan extends Model
 
     protected $fillable = [
         'id_kredit_limit',
-        'nama_pt',
         'nomor_sh',
         'nomor_tebusan',
         'metode_tebusan',
-        'tanggal',
+        'tanggal_tebus',
         'tanggal_so',
         'nomor_qt',
         'nomor_so',
@@ -54,8 +52,8 @@ class Tebusan extends Model
         return $this->belongsTo(KreditLimit::class);
     }
 
-    public function items(): HasMany
+    public function itemTebusan()
     {
-        return $this->hasMany(ItemTebusan::class, 'id_tebusan', 'id');
+        return $this->hasMany(ItemTebusan::class);
     }
 }

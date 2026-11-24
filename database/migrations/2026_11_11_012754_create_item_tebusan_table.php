@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('item_tebusan', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_stok')
-                ->foreign('id_stok')
+            $table->uuid('id_item')
+                ->foreign('id_item')
                 ->references('id')
-                ->on('stok');
+                ->on('item');
             $table->uuid('id_tebusan')
                 ->foreign('id_tebusan')
                 ->references('id')

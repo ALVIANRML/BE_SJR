@@ -3,8 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\KreditLimitController;
+use App\Http\Controllers\PerusahaanController;
 use App\Http\Controllers\SegmentController;
-use App\Http\Controllers\StokController;
 use App\Http\Controllers\TebusanController;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,18 +28,21 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/update-item/{id}', [ItemController::class, 'update']);
     Route::delete('/delete-item/{id}', [ItemController::class, 'destroy']);
 
+    // kredit limit
     Route::post('/add-kredit_limit', [KreditLimitController::class, 'store']);
     Route::get('/get-kredit_limit', [KreditLimitController::class, 'index']);
     Route::get('/get-kredit_limit/{id}', [KreditLimitController::class, 'show']);
     Route::post('/update-kredit_limit/{id}', [KreditLimitController::class, 'update']);
     Route::delete('/delete-kredit_limit/{id}', [KreditLimitController::class, 'destroy']);
 
-    Route::post('/add-stok', [StokController::class, 'store']);
-    Route::get('/get-stok', [StokController::class, 'index']);
-    Route::get('/get-stok/{id}', [StokController::class, 'show']);
-    Route::post('/update-stok/{id}  ', [StokController::class, 'update']);
-    Route::delete('/delete-stok/{id}', [StokController::class, 'destroy']);
+    // perusahaan
+    Route::post('/add-perusahaan', [PerusahaanController::class, 'store']);
+    Route::get('/get-perusahaan', [PerusahaanController::class, 'index']);
+    Route::get('/get-perusahaan/{id}', [PerusahaanController::class, 'show']);
+    Route::post('/update-perusahaan/{id}  ', [PerusahaanController::class, 'update']);
+    Route::delete('/delete-perusahaan/{id}', [PerusahaanController::class, 'destroy']);
 
+    // item_tebusan
     Route::post('add-tebusan', [TebusanController::class, 'store']);
 
 });

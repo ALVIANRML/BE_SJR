@@ -13,8 +13,10 @@ class Item extends Model
 
     protected $fillable = [
         'id_segment',
+        'id_perusahaan',
         'nama_item',
         'kemasan',
+        'jumlah_item',
         'jumlah_liter',
         'harga_jual',
         'harga_tebus',
@@ -38,5 +40,14 @@ class Item extends Model
     public function segment()
     {
         return $this->belongsTo(Segment::class);
+    }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class);
+    }
+
+    public function itemTebusan(){
+        return $this->hasMany(ItemTebusan::class);
     }
 }

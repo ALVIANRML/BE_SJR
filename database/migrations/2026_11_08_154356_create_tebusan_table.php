@@ -17,23 +17,23 @@ return new class extends Migration
             $table->foreign('id_kredit_limit')
                 ->references('id')
                 ->on('kredit_limit');
-            $table->string('nama_pt')->nullable();
             $table->string('nomor_sh')->nullable();
             $table->string('nomor_tebusan')->nullable();
             $table->string('metode_tebusan')->nullable();
             $table->string('status_tebusan')->nullable();
-            $table->date('tanggal')->nullable();
+            $table->date('tanggal_tebus')->nullable();
             $table->date('tanggal_so')->nullable();
             $table->string('nomor_qt')->nullable();
             $table->string('nomor_so')->nullable();
-            $table->decimal('total_tebusan', 30, 2)->nullable();
+            $table->decimal('harga_tebusan', 30, 2)->nullable();
             $table->date('tanggal_berita_acara')->nullable();
             $table->date('tanggal_jatuh_tempo')->nullable();
-            $table->smallInteger('total_jumlah_tebusan')->nullable();
+            $table->smallInteger('jumlah_tebusan')->nullable();
             $table->date('tanggal_pelunasan_tebusan')->nullable();
             $table->decimal('harga_pelunasan', 30, 2)->nullable();
             $table->string('form_permintaan')->nullable();
             $table->string('form_qt')->nullable();
+            $table->string('form_so')->nullable();
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });

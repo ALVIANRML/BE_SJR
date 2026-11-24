@@ -13,7 +13,7 @@ class ItemTebusan extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id_stok',
+        'id_item',
         'id_tebusan',
         'jumlah',
         'harga',
@@ -34,9 +34,9 @@ class ItemTebusan extends Model
         });
     }
 
-    public function stok()
+    public function item()
     {
-        return $this->belongsTo(Stok::class);
+        return $this->belongsTo(Item::class);
     }
 
     public function tebusan(): BelongsTo

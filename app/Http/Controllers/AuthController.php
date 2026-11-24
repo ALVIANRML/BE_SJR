@@ -28,6 +28,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'User berhasil dibuat',
             'success' => true,
+            'data' => $user,
         ], 201);
     }
 
@@ -68,7 +69,7 @@ class AuthController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal Logout',
+                'message' => 'Gagal Logout'.$e,
             ], 401);
         }
     }

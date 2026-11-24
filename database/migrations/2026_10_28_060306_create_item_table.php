@@ -17,11 +17,16 @@ return new class extends Migration
             $table->foreign('id_segment')
             ->references('id')
             ->on('segment');
+            $table->smallInteger('id_perusahaan');
+            $table->foreign('id_perusahaan')
+            ->references('id')
+            ->on('perusahaan');
             $table->string('nama_item');
             $table->string('kemasan');
             $table->decimal('jumlah_liter',10,2);
             $table->decimal('harga_jual', 30,2);
             $table->decimal('harga_tebus', 30,2);
+            $table->smallInteger('jumlah_item');
             $table->timestamps();
         });
     }
