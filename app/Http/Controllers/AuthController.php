@@ -51,7 +51,7 @@ class AuthController extends Controller
             'message' => 'Anda berhasil login',
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => config('jwt.ttl') * 1000,
+            'expires_in' => config('jwt.ttl') * 100000,
 
         ]);
     }
