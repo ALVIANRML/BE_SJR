@@ -52,8 +52,8 @@ class Tebusan extends Model
         return $this->belongsTo(KreditLimit::class);
     }
 
-    public function itemTebusan()
-    {
-        return $this->hasMany(ItemTebusan::class);
-    }
+public function itemTebusan()
+{
+    return $this->hasMany(ItemTebusan::class, 'id_tebusan', 'id');
+}
 }

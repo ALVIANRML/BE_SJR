@@ -33,17 +33,13 @@ class TebusanController extends Controller
             $validated = $request->validate([
                 'nama_pt' => 'required',
                 'nomor_sh' => 'required',
-                'nomor_surat' => 'required',
-                'kode_pt' => 'required',
-                'bulan_romawi' => 'required',
-                'tahun' => 'required',
                 'metode_tebusan' => 'required',
                 'tanggal_tebus' => 'required',
 
                 'items' => 'required|array|min:1',
                 'items.*.id_item' => 'required|exists:item,id',
                 'items.*.jumlah' => 'required|numeric|min:1',
-                'items.*.harga' => 'nullable|numeric|min:0',
+
             ]);
 
             $result = DB::transaction(function () use ($validated) {
@@ -53,18 +49,13 @@ class TebusanController extends Controller
                     ->except('items')
                     ->toArray();
 
-                $dataTebusan['nomor_tebusan'] = implode('/', [
-                    $dataTebusan['nomor_surat'],
-                    $dataTebusan['kode_pt'],
-                    $dataTebusan['bulan_romawi'],
-                    $dataTebusan['tahun'],
-                ]);
+
 
                 // Simpan tebusan
                 $tebusan = Tebusan::create($dataTebusan);
 
                 // Simpan banyak item
-                $items = $tebusan->items()->createMany(
+                $items = $tebusan->itemTebusan()->createMany(
                     $validated['items']
                 );
 
